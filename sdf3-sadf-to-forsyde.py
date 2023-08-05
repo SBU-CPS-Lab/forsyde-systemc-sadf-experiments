@@ -42,7 +42,7 @@ def sdf3_to_forsyde(inproot):
     # doc = minidom.Document()
 
     # Create the root element
-    outroot = ET.Element('process-network')
+    outroot = ET.Element('process_network')
     outroot.set('name', os.path.splitext(os.path.basename(sys.argv[2]))[0])
 
     # Generate signals
@@ -56,6 +56,18 @@ def sdf3_to_forsyde(inproot):
         outsignal.set('source_port', channel_attribs['srcPort'])
         outsignal.set('target', channel_attribs['dstActor'])
         outsignal.set('target_port', channel_attribs['dstPort'])
+    
+    # Generate extra signals for connecting to the detector
+    for inpactor in inproot_sadf.findall('actor'):
+        actor_attribs = inpactor.attrib
+        outsignal = ET.SubElement(outroot, 'signal')
+        outsignal.set('name', actor_attribs['name'] + '_detectorsig')
+        outsignal.set('moc', 'sadf')
+        outsignal.set('type', 'unsigned int')
+        outsignal.set('source', 'detector1')
+        outsignal.set('source_port', 'oport1')
+        outsignal.set('target', actor_attribs['name'])
+        outsignal.set('target_port', 'cport1')
     
     # Generate delay actors
     for inpchannel in inproot_sadf.findall('channel'):
@@ -91,9 +103,13 @@ def sdf3_to_forsyde(inproot):
         actor_attribs = inpactor.attrib
         outprocess = ET.SubElement(outroot, 'leaf_process')
         outprocess.set('name', actor_attribs['name'])
+        # generate the control port from the detector
+        ET.SubElement(outprocess, 'port', {'name': 'cport1', 'moc': 'sadf', 'type': 'unsigned int', 'direction': 'in'})
+        # Generate the input and output ports
         for inpport in inpactor.findall('port'):
             port_attribs = inpport.attrib
             ET.SubElement(outprocess, 'port', {'name': port_attribs['name'], 'moc': 'sadf', 'type': 'double', 'direction': port_attribs['type']})
+        # Generate the process constructor
         outpc = ET.SubElement(outprocess, 'process_constructor')
         outpcnuminps = len(inpactor.findall('port/[@type="in"]'))
         outpcnumouts = len(inpactor.findall('port/[@type="out"]'))
@@ -111,7 +127,22 @@ def sdf3_to_forsyde(inproot):
         if outpcname == 'kernelMN':
             ET.SubElement(outpc, 'argument', {'name': '_func', 'value': '{}_func'.format(actor_attribs['name'])})
             scenario_table = extract_scenario_table(actor_attribs['name'], inproot.find('applicationGraph'))
-            ET.SubElement(outpc, 'argument', {'name': 'scenario_table', 'value': repr(scenario_table)})
+            scenario_table_fsd = [(idx,val) for idx,val in enumerate(scenario_table.values())]
+            ET.SubElement(outpc, 'argument', {'name': 'scenario_table', 'value': repr(scenario_table_fsd)})
+    
+    # Generate the detector process
+    outprocess = ET.SubElement(outroot, 'leaf_process')
+    outprocess.set('name', 'detector1')
+    # for kernel,idx in enumerate(inproot_sadf.findall('actor')):
+    #     ET.SubElement(outprocess, 'port', {'name': 'oport{}'.format(idx+1), 'moc': 'sadf', 'type': 'double', 'direction': 'out'})
+    ET.SubElement(outprocess, 'port', {'name': 'oport1', 'moc': 'sadf', 'type': 'double', 'direction': 'out'})
+    outpc = ET.SubElement(outprocess, 'process_constructor', {'name': 'detector', 'moc': 'sadf'})
+    ET.SubElement(outpc, 'argument', {'name': 'cds_func', 'value': 'detectorcds_func'})
+    ET.SubElement(outpc, 'argument', {'name': 'kss_func', 'value': 'detectorkss_func'})
+    scenario_table_str = '[' + ','.join(['({},1)'.format(idx) for idx,val in enumerate(inproot.findall('applicationGraph/fsm/state'))]) + ']'
+    ET.SubElement(outpc, 'argument', {'name': 'scenario_table', 'value': repr(scenario_table_str)})
+    ET.SubElement(outpc, 'argument', {'name': 'init_sc', 'value': '0'})
+
     return outroot
 
 
