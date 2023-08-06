@@ -25,9 +25,9 @@ def extract_scenario_table(actor_name, inproot):
         scenario_table[scenario.attrib['name']] = ([], [])
         for inpport in scenario.findall('actorProperties/[@actor="{}"]/port'.format(actor_name)):
             if actor_graph.find('port/[@name="{}"]/[@type="in"]'.format(inpport.attrib['name'])) is not None:
-                scenario_table[scenario.attrib['name']][0].append(inpport.attrib['rate'])
+                scenario_table[scenario.attrib['name']][0].append(int(inpport.attrib['rate']))
             else:
-                scenario_table[scenario.attrib['name']][1].append(inpport.attrib['rate'])
+                scenario_table[scenario.attrib['name']][1].append(int(inpport.attrib['rate']))
     return scenario_table
 
 '''\
@@ -140,7 +140,7 @@ def sdf3_to_forsyde(inproot):
     ET.SubElement(outpc, 'argument', {'name': 'cds_func', 'value': 'detectorcds_func'})
     ET.SubElement(outpc, 'argument', {'name': 'kss_func', 'value': 'detectorkss_func'})
     scenario_table_str = '[' + ','.join(['({},1)'.format(idx) for idx,val in enumerate(inproot.findall('applicationGraph/fsm/state'))]) + ']'
-    ET.SubElement(outpc, 'argument', {'name': 'scenario_table', 'value': repr(scenario_table_str)})
+    ET.SubElement(outpc, 'argument', {'name': 'scenario_table', 'value': scenario_table_str})
     ET.SubElement(outpc, 'argument', {'name': 'init_sc', 'value': '0'})
 
     return outroot
