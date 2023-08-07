@@ -58,14 +58,14 @@ def sdf3_to_forsyde(inproot):
         outsignal.set('target_port', channel_attribs['dstPort'])
     
     # Generate extra signals for connecting to the detector
-    for inpactor in inproot_sadf.findall('actor'):
+    for idx,inpactor in enumerate(inproot_sadf.findall('actor')):
         actor_attribs = inpactor.attrib
         outsignal = ET.SubElement(outroot, 'signal')
         outsignal.set('name', actor_attribs['name'] + '_detectorsig')
         outsignal.set('moc', 'sadf')
         outsignal.set('type', 'unsigned int')
         outsignal.set('source', 'detector1')
-        outsignal.set('source_port', 'oport1')
+        outsignal.set('source_port', 'oport{}'.format(idx+1))
         outsignal.set('target', actor_attribs['name'])
         outsignal.set('target_port', 'cport1')
     
@@ -133,15 +133,18 @@ def sdf3_to_forsyde(inproot):
     # Generate the detector process
     outprocess = ET.SubElement(outroot, 'leaf_process')
     outprocess.set('name', 'detector1')
-    # for kernel,idx in enumerate(inproot_sadf.findall('actor')):
-    #     ET.SubElement(outprocess, 'port', {'name': 'oport{}'.format(idx+1), 'moc': 'sadf', 'type': 'double', 'direction': 'out'})
-    ET.SubElement(outprocess, 'port', {'name': 'oport1', 'moc': 'sadf', 'type': 'double', 'direction': 'out'})
-    outpc = ET.SubElement(outprocess, 'process_constructor', {'name': 'detector', 'moc': 'sadf'})
+    for idx,kernel in enumerate(inproot_sadf.findall('actor')):
+        ET.SubElement(outprocess, 'port', {'name': 'oport{}'.format(idx+1), 'moc': 'sadf', 'type': 'unsigned int', 'direction': 'out'})
+    #ET.SubElement(outprocess, 'port', {'name': 'oport1', 'moc': 'sadf', 'type': 'unsigned int', 'direction': 'out'})
+    outpc = ET.SubElement(outprocess, 'process_constructor', {'name': 'detectorMN', 'moc': 'sadf'})
     ET.SubElement(outpc, 'argument', {'name': 'cds_func', 'value': 'detectorcds_func'})
     ET.SubElement(outpc, 'argument', {'name': 'kss_func', 'value': 'detectorkss_func'})
-    scenario_table_str = '[' + ','.join(['({},1)'.format(idx) for idx,val in enumerate(inproot.findall('applicationGraph/fsm/state'))]) + ']'
+    #  make a string of the form '[1,1,...,1]' where the number of 1's is the number of kernels
+    out_prod_str = '[' + ','.join(['1' for val in inproot_sadf.findall('actor')]) + ']'
+    scenario_table_str = '[' + ','.join(['({},{})'.format(idx,out_prod_str) for idx,val in enumerate(inproot.findall('applicationGraph/fsm/state'))]) + ']'
     ET.SubElement(outpc, 'argument', {'name': 'scenario_table', 'value': scenario_table_str})
     ET.SubElement(outpc, 'argument', {'name': 'init_sc', 'value': '0'})
+    ET.SubElement(outpc, 'argument', {'name': 'itok', 'value': '{}'})
 
     return outroot
 
