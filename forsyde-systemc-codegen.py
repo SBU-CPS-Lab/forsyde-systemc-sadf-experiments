@@ -37,7 +37,11 @@ def conv_c_init(arg_val):
 Generate the SystemC code for the given function.
 The function gets the leaf process XML element and the function argument XML element as input and returns the SystemC code
 '''
-def generate_func_code(lp, func_arg, scenarios):
+def generate_func_code(lp, func_arg, sdf3root):
+    # Extract the scenarios XML element from the sdf3root
+    scenarios = sdf3root.find('applicationGraph/fsmsadfProperties/scenarios')
+    # Extract the fsm XML element from the sdf3root
+    fsm = sdf3root.find('applicationGraph/fsm')
     # Prepare strings for input and output vector arguments
     in_vec_args = ', '.join('vector<{}>'.format(p.attrib['type']) for p in lp.findall('port/[@direction="in"]') if p.attrib['name'] != 'cport1')
     out_vec_args = ', '.join('vector<{}>'.format(p.attrib['type']) for p in lp.findall('port/[@direction="out"]'))
@@ -80,9 +84,25 @@ void {0}(tuple<{1}>& out,
 void {}(int& new_scenario,
     const unsigned int& previous_scenario,
     const tuple<{}>& inp) {{
-    ;
-}}
+    // make a state machine for the detector that depending on the previous scenario transitions to a new scenario
+    switch(previous_scenario) {{
 '''.format(func_arg.attrib['value'], in_vec_args)
+                for idx,state in enumerate(fsm.findall('state')):
+                    code += '''\
+        case {0}: {{
+            unsigned int trans_dests[] = {{{1}}};
+            new_scenario = trans_dests[rand()%{2}];
+            break;
+        }}
+'''.format(idx, ', '.join('{}'.format(t.attrib['destination'][1:]) for t in state.findall('transition')), len(state.findall('transition')))
+                code += '''\
+        default: {
+            ;
+            break;
+        }
+    }
+}
+'''
             
             elif func_arg.attrib['name'] == 'kss_func':
                 code = '''\
@@ -112,9 +132,6 @@ def generate_code(inproot, sdf3root):
     # Get the parent of each port
     inparent = {c:p for p in inproot.iter() for c in p}
 
-    # Extract the scenarios XML element from the sdf3root
-    scenarios = sdf3root.find('applicationGraph/fsmsadfProperties/scenarios')
-
     # Generate the header
     code = '''\
 #include <forsyde.hpp>
@@ -129,7 +146,7 @@ using namespace std;
     for lp in inproot.findall('leaf_process'):
         for pcarg in lp.findall('process_constructor/argument'):
             if pcarg.attrib['name'].endswith('_func'):
-                code += generate_func_code(lp, pcarg, scenarios)
+                code += generate_func_code(lp, pcarg, sdf3root)
 #                 code += '''\
 # #include "{}{}.hpp"
 # '''.format(lp.attrib['name'], pcarg.attrib['name'])
