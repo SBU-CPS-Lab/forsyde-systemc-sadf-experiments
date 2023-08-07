@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 '''\
 This script generates ForSyDe-SystemC code from a ForSyDe-XML SADF model.
-The script takes as input the path to the ForSyDe-XML SADF model and the path to the output file.
+The script takes as input the path to the ForSyDe-XML SADF model, the path to the original SDF3 model,
+and the path to the output file.
 '''
 
 import sys
@@ -36,22 +37,43 @@ def conv_c_init(arg_val):
 Generate the SystemC code for the given function.
 The function gets the leaf process XML element and the function argument XML element as input and returns the SystemC code
 '''
-def generate_func_code(lp, func_arg):
+def generate_func_code(lp, func_arg, scenarios):
     # Prepare strings for input and output vector arguments
     in_vec_args = ', '.join('vector<{}>'.format(p.attrib['type']) for p in lp.findall('port/[@direction="in"]') if p.attrib['name'] != 'cport1')
     out_vec_args = ', '.join('vector<{}>'.format(p.attrib['type']) for p in lp.findall('port/[@direction="out"]'))
     # Generate code based on the process constructor type
     match lp.find('process_constructor').attrib['name']:
+
         case 'kernelMN':
             code = '''\
 
-void {}(tuple<{}>& out,
+void {0}(tuple<{1}>& out,
     const unsigned int& _scenario_state,
-    const tuple<{}>& inp) {{
-    ;
-}}
+    const tuple<{2}>& inp) {{
+    static int i=0;volatile int j,k;
+    switch(_scenario_state) {{
 '''.format(func_arg.attrib['value'], out_vec_args, in_vec_args)
+            for idx,scenario in enumerate(scenarios.findall('scenario')):
+                code += '''\
+        case {0}: {{
+            for(j=0;j<{1};j++)
+                for(k=0;k<1000000;k++);
+            break;
+        }}
+'''.format(idx, scenario.find('actorProperties/[@actor="{}"]/processor/[@default="true"]/executionTime'.format(lp.attrib['name'])).attrib['time'])
+            code += '''\
+        default: {{
+            ;
+            break;
+        }}
+    }}
+    
+    std::cout<<"from: {0} iter: "<<i++<<std::endl;
+}}
+'''.format(func_arg.attrib['value'])
+        
         case 'detectorMN':
+            
             if func_arg.attrib['name'] == 'cds_func':
                 code = '''\
 
@@ -61,15 +83,23 @@ void {}(int& new_scenario,
     ;
 }}
 '''.format(func_arg.attrib['value'], in_vec_args)
+            
             elif func_arg.attrib['name'] == 'kss_func':
                 code = '''\
 
 void {}(tuple<{}>& out,
     const unsigned int& current_scenario,
     const tuple<{}>& inp) {{
-    ;
-}}
 '''.format(func_arg.attrib['value'], out_vec_args, in_vec_args)
+                # Write a 1 to the first element of each vector in the output tuple
+                for idx, outport in enumerate(lp.findall('port/[@direction="out"]')):
+                    code += '''\
+    get<{}>(out)[0]=1;
+'''.format(idx)
+                code += '''\
+}
+'''
+
     return code
 
 
@@ -78,8 +108,13 @@ Generate the SystemC code for the given SADF model.
 The function gets the root XML element of the SADF model as input and returns the SystemC code
 as a string.
 '''
-def generate_code(inproot):
+def generate_code(inproot, sdf3root):
+    # Get the parent of each port
     inparent = {c:p for p in inproot.iter() for c in p}
+
+    # Extract the scenarios XML element from the sdf3root
+    scenarios = sdf3root.find('applicationGraph/fsmsadfProperties/scenarios')
+
     # Generate the header
     code = '''\
 #include <forsyde.hpp>
@@ -94,7 +129,7 @@ using namespace std;
     for lp in inproot.findall('leaf_process'):
         for pcarg in lp.findall('process_constructor/argument'):
             if pcarg.attrib['name'].endswith('_func'):
-                code += generate_func_code(lp, pcarg)
+                code += generate_func_code(lp, pcarg, scenarios)
 #                 code += '''\
 # #include "{}{}.hpp"
 # '''.format(lp.attrib['name'], pcarg.attrib['name'])
@@ -150,14 +185,15 @@ SC_MODULE({}) {{
         
     # Generate the footer
     code += '''\
-    }
-};
+    }}
+}};
 
 int sc_main(int argc, char* argv[]) {{
+    {} top("top");
     sc_start();
     return 0;
 }}
-'''
+'''.format(inproot.attrib['name'])
 
     return code
 
@@ -166,23 +202,31 @@ Main function of the script.
 '''
 def main():
     # Check the number of arguments
-    if len(sys.argv) != 3:
-        print('Usage: {} <input> <output>'.format(sys.argv[0]))
+    if len(sys.argv) != 4:
+        print('Usage: {} <forsyde-input> <sdf3-input> <output>'.format(sys.argv[0]))
         sys.exit(1)
     
-    # Check the input file
+    # Check the forsyde input file
     if not os.path.isfile(sys.argv[1]):
         print('Error: input file {} does not exist'.format(sys.argv[1]))
         sys.exit(1)
     
-    # Parse the input file
+    # Check the sdf3 input file
+    if not os.path.isfile(sys.argv[2]):
+        print('Error: input file {} does not exist'.format(sys.argv[2]))
+        sys.exit(1)
+    
+    # Parse the forsyde input file
     inproot = ET.parse(sys.argv[1]).getroot()
+
+    # Parse the sdf3 input file
+    sdf3root = ET.parse(sys.argv[2]).getroot()
     
     # Generate the code
-    code = generate_code(inproot)
+    code = generate_code(inproot, sdf3root)
     
     # Write the code to the output file
-    with open(sys.argv[2], 'w') as outfile:
+    with open(sys.argv[3], 'w') as outfile:
         outfile.write(code)
     
     # Exit the script
