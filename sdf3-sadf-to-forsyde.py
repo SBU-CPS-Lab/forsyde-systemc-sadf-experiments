@@ -40,6 +40,15 @@ def sdf3_to_forsyde(inproot):
 
     # # Create the XML document
     # doc = minidom.Document()
+    # Make a dictionary of token sizes for each channel
+    token_sizes = {}
+    for inpchannel in inproot_sadf.findall('channel'):
+        # Extract all the token size nodes from all scenarios for a channel
+        channel_attribs = inpchannel.attrib
+        tokens = inproot.findall('applicationGraph/fsmsadfProperties/scenarios/scenario/channelProperties/[@channel="{}"]/tokenSize'.format(channel_attribs['name']))
+        # Extract the maximum token size
+        token_size = max([int(token_size.attrib['sz']) for token_size in tokens])
+        token_sizes[channel_attribs['name']] = token_size
 
     # Create the root element
     outroot = ET.Element('process_network')
@@ -51,7 +60,7 @@ def sdf3_to_forsyde(inproot):
         outsignal = ET.SubElement(outroot, 'signal')
         outsignal.set('name', channel_attribs['name'])
         outsignal.set('moc', 'sadf')
-        outsignal.set('type', 'double')
+        outsignal.set('type', 'array<int,{}>'.format(token_sizes[channel_attribs['name']]))
         outsignal.set('source', channel_attribs['srcActor'])
         outsignal.set('source_port', channel_attribs['srcPort'])
         outsignal.set('target', channel_attribs['dstActor'])
@@ -76,10 +85,10 @@ def sdf3_to_forsyde(inproot):
             # make a delayn
             outprocess = ET.SubElement(outroot, 'leaf_process')
             outprocess.set('name', channel_attribs['name'] + '_delay')
-            ET.SubElement(outprocess, 'port', {'name': "iport1", 'moc': "sadf", 'type': "double", 'direction': "in"})
-            ET.SubElement(outprocess, 'port', {'name': "oport1", 'moc': "sadf", 'type': "double", 'direction': "out"})
+            ET.SubElement(outprocess, 'port', {'name': "iport1", 'moc': "sadf", 'type': "array<int,{}>".format(token_sizes[channel_attribs['name']]), 'direction': "in"})
+            ET.SubElement(outprocess, 'port', {'name': "oport1", 'moc': "sadf", 'type': "array<int,{}>".format(token_sizes[channel_attribs['name']]), 'direction': "out"})
             outpc = ET.SubElement(outprocess, 'process_constructor', {'name': "delayn", 'moc': "sadf"})
-            ET.SubElement(outpc, 'argument', {'name': "init_val", 'value': "0.0"})
+            ET.SubElement(outpc, 'argument', {'name': "init_val", 'value': "array<int,{}>()".format(token_sizes[channel_attribs['name']])})
             ET.SubElement(outpc, 'argument', {'name': "n", 'value': channel_attribs['initialTokens']})
 
             # make a new signal
@@ -87,7 +96,7 @@ def sdf3_to_forsyde(inproot):
             newoutsig = ET.Element('signal')
             newoutsig.set('name', channel_attribs['name'] + '_delaysig')
             newoutsig.set('moc', 'sadf')
-            newoutsig.set('type', 'double')
+            newoutsig.set('type', "array<int,{}>".format(token_sizes[channel_attribs['name']]))
             newoutsig.set('source', channel_attribs['name'] + '_delay')
             newoutsig.set('source_port', 'oport1')
             newoutsig.set('target', outsignal.attrib['target'])
@@ -108,7 +117,8 @@ def sdf3_to_forsyde(inproot):
         # Generate the input and output ports
         for inpport in inpactor.findall('port'):
             port_attribs = inpport.attrib
-            ET.SubElement(outprocess, 'port', {'name': port_attribs['name'], 'moc': 'sadf', 'type': 'double', 'direction': port_attribs['type']})
+            bound_channel = inproot_sadf.findall("channel/[@srcActor='{0}']/[@srcPort='{1}']".format(actor_attribs['name'], port_attribs['name'])) or inproot_sadf.findall("channel/[@dstActor='{0}']/[@dstPort='{1}']".format(actor_attribs['name'], port_attribs['name']))
+            ET.SubElement(outprocess, 'port', {'name': port_attribs['name'], 'moc': 'sadf', 'type': "array<int,{}>".format(token_sizes[bound_channel[0].attrib['name']]), 'direction': port_attribs['type']})
         # Generate the process constructor
         outpc = ET.SubElement(outprocess, 'process_constructor')
         outpcnuminps = len(inpactor.findall('port/[@type="in"]'))
@@ -139,7 +149,7 @@ def sdf3_to_forsyde(inproot):
     outpc = ET.SubElement(outprocess, 'process_constructor', {'name': 'detectorMN', 'moc': 'sadf'})
     ET.SubElement(outpc, 'argument', {'name': 'cds_func', 'value': 'detectorcds_func'})
     ET.SubElement(outpc, 'argument', {'name': 'kss_func', 'value': 'detectorkss_func'})
-    #  make a string of the form '[1,1,...,1]' where the number of 1's is the number of kernels
+    #  make a string of the form '[1,1,...,1]' where the number of 1's is the numb6er of kernels
     out_prod_str = '[' + ','.join(['1' for val in inproot_sadf.findall('actor')]) + ']'
     scenario_table_str = '[' + ','.join(['({},{})'.format(idx,out_prod_str) for idx,val in enumerate(inproot.findall('applicationGraph/fsm/state'))]) + ']'
     ET.SubElement(outpc, 'argument', {'name': 'scenario_table', 'value': scenario_table_str})
