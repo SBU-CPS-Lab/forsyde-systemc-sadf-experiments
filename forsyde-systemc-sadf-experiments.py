@@ -23,13 +23,6 @@ import itertools
 # import random
 # import numpy as np
 
-# Some global definitions accessible throughout the script
-args = None
-params = None
-configs = None
-csv_file = None
-csv_writer = None
-
 # Parse the command line arguments
 def parse_args():
     # Create the parser
@@ -39,23 +32,6 @@ def parse_args():
     parser.add_argument('-c', '--config', help='Path to the configuration file', required=False, default='config.ini')
     args = parser.parse_args()
     return args
-
-# Example of the parameters file
-# nrActors = 1
-# degree = 1
-# execTime = 1
-# nrScenarios = 1
-# tokenSize = 1
-
-# Example of the configuration file
-# sdf3_path = /home/ahmed/sdf3/bin/sdf3
-# forsyde_path = /home/ahmed/forsyde-systemc
-# forsyde_systemc_path = /home/ahmed/forsyde-systemc-systemc
-# forsyde_systemc_lib_path = /home/ahmed/forsyde-systemc-systemc/lib-linux64
-# forsyde_systemc_include_path = /home/ahmed/forsyde-systemc-systemc/include
-# forsyde_systemc_libs = -lsystemc -lm
-# forsyde_systemc_cflags = -std=c++11 -I$(INCLUDE_PATH) -L$(LIB_PATH) $(LIBS)
-# forsyde_systemc_ldflags = -std=c++11 -I$(INCLUDE_PATH) -L$(LIB_PATH) $(LIBS)
 
 # Read the parameters file
 def read_params(args):
@@ -129,23 +105,41 @@ def generate_sdf3_graph(args,params,configs):
     </settings>
 </sdf3>
 '''.format(**params,
-           degree_min=max(1,params['nrActors']-2), degree_max=params['nrActors']+2,
+           degree_min=max(1,params['degree']-2), degree_max=params['degree']+2,
            execTime_min=max(1,params['execTime']-2), execTime_max=params['execTime']+2,
            tokenSize_min=max(1,params['tokenSize']-2), tokenSize_max=params['tokenSize']+2)
     with open(os.path.join(params['output_path'], 'sdf-options.xml'), 'w') as f:
         f.write(options_file_str)
 
     # Generate the SDF3 command
-    # example: ~/Downloads/sdf3generate-fsmsadf --settings sdf3-opt.xml --output fsmsadf1.xml
     cmd = [configs['sdf3_path'] + '/build/release/Linux/bin/sdf3generate-fsmsadf', '--settings', os.path.join(params['output_path'], 'sdf-options.xml'), '--output', os.path.join(params['output_path'], 'sdf3_graph.xml')]
     
     # Execute the SDF3 command
     subprocess.call(cmd)
 
+'''\
+Execute the (patched) SDF3 analysis command for extracting the repeatition vectors
+'''
+def sdf3_analysis(params,configs):
+    # Generate the SDF3 analysis command for extracting the repeatition vectors
+    cmd = [configs['sdf3_path'] + '/build/release/Linux/bin/sdf3analyze-fsmsadf', 
+           '--graph', os.path.join(params['output_path'], 'sdf3_graph.xml'),
+           '--algo', 'repeatitions',
+           '--output', os.path.join(params['output_path'], 'sdf3_graph_repeatitions.txt')
+    ]
+
+    # Execute the SDF3 analysis command
+    subprocess.call(cmd)
+
 # Convert the synthetic SADF graph from SDF3 format to ForSyDe-XDF format
 def sdf3_to_forsyde(args,params,configs):
     # Generate the sdf3-sadf-to-forsyde.py command
-    cmd = ['python', './sdf3-sadf-to-forsyde.py', os.path.join(params['output_path'], 'sdf3_graph.xml'), os.path.join(params['output_path'], 'forsyde_graph.xml')]    
+    cmd = ['python',
+           './sdf3-sadf-to-forsyde.py',
+           os.path.join(params['output_path'],'sdf3_graph.xml'),
+           os.path.join(params['output_path'], 'sdf3_graph_repeatitions.txt'),
+           os.path.join(params['output_path'], 'forsyde_graph.xml')
+    ]    
     
     # Execute the SDF3 command
     subprocess.call(cmd)
@@ -200,6 +194,9 @@ def run_experiments(args,params,config,csv_writer):
         # Generate the synthetic SADF graph using SDF3
         generate_sdf3_graph(args,params_dict,config)
 
+        # Generate the repeatition vectors file from the generated SADF graph
+        sdf3_analysis(params_dict,config)
+
         # Convert the SDF3 graph to the ForSyDe-XML format
         sdf3_to_forsyde(args,params_dict,config)
         
@@ -213,7 +210,7 @@ def run_experiments(args,params,config,csv_writer):
         exec_time = simulate_forsyde_systemc_code(args,params_dict)
         
         # Write the results in the CSV file
-        csv_writer.writerow(*params_values, exec_time)
+        csv_writer.writerow([*params_values, exec_time])
 
 # Prepare the CSV file
 def prepare_csv_file(args, params):
@@ -224,13 +221,8 @@ def prepare_csv_file(args, params):
     # Write the header of the CSV file
     
     # Write the parameters
-    csv_writer.writerow(['# Parameters'])
-    for key, value in params.items():
-        csv_writer.writerow([key, value])
-    
-    # Write the header of the CSV file
-    csv_writer.writerow(['# Results'])
-    
+    csv_writer.writerow([*params.keys(), 'simTime'])
+        
     return csv_file, csv_writer
 
 # Main function

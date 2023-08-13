@@ -32,10 +32,10 @@ def extract_scenario_table(actor_name, inproot):
 
 '''\
 Convert the SDF3-based SADF model to a ForSyDe-based SADF model.
-The function gets the root XML element of the SDF3-generated FSM-SADF model as input and
+The function gets the root XML element of the SDF3-generated FSM-SADF model and the repeatition vector as inputs and
 returns the root XML element of the ForSyDe-based SADF model.
 '''
-def sdf3_to_forsyde(inproot):
+def sdf3_to_forsyde(inproot, rv):
     inproot_sadf = inproot.find('applicationGraph/fsmsadf/scenariograph')
 
     # # Create the XML document
@@ -81,7 +81,7 @@ def sdf3_to_forsyde(inproot):
     # Generate delay actors
     for inpchannel in inproot_sadf.findall('channel'):
         channel_attribs = inpchannel.attrib
-        if 'initialTokens' in channel_attribs and channel_attribs['initialTokens'] > '0':
+        if 'initialTokens' in channel_attribs and int(channel_attribs['initialTokens']) > 0:
             # make a delayn
             outprocess = ET.SubElement(outroot, 'leaf_process')
             outprocess.set('name', channel_attribs['name'] + '_delay')
@@ -149,35 +149,68 @@ def sdf3_to_forsyde(inproot):
     outpc = ET.SubElement(outprocess, 'process_constructor', {'name': 'detectorMN', 'moc': 'sadf'})
     ET.SubElement(outpc, 'argument', {'name': 'cds_func', 'value': 'detectorcds_func'})
     ET.SubElement(outpc, 'argument', {'name': 'kss_func', 'value': 'detectorkss_func'})
-    #  make a string of the form '[1,1,...,1]' where the number of 1's is the numb6er of kernels
-    out_prod_str = '[' + ','.join(['1' for val in inproot_sadf.findall('actor')]) + ']'
-    scenario_table_str = '[' + ','.join(['({},{})'.format(idx,out_prod_str) for idx,val in enumerate(inproot.findall('applicationGraph/fsm/state'))]) + ']'
+    scenario_table_str = '[' + ','.join(['({},{})'.format(idx,list(rv.values())[idx]) for idx,val in enumerate(inproot.findall('applicationGraph/fsm/state'))]) + ']'
     ET.SubElement(outpc, 'argument', {'name': 'scenario_table', 'value': scenario_table_str})
     ET.SubElement(outpc, 'argument', {'name': 'init_sc', 'value': '0'})
     ET.SubElement(outpc, 'argument', {'name': 'itok', 'value': '{}'})
 
     return outroot
 
+'''\
+Read the repeatition vectors from the file.
+The function gets the path to the repeatition vector file as input and returns a dictionary of scenarios to repeatition vectors.
+The format of the output file is:
+[s, 0]: [2, 1, 2, 1, 1]
+[s, 1]: [2, 1, 2, 1, 1]
+[s, 2]: [1, 1, 2, 1, 1]
+...
+'''
+def extract_repeatition_vectors(rv_file_path):
+    # Create the dictionary of scenarios to repeatition vectors
+    scenarios_to_repeatitions = {}
+    # Open the output file
+    with open(rv_file_path, 'r') as f:
+        # Iterate over the lines of the output file
+        for line in f:
+            # Extract the scenario name and the repeatition vector
+            scenario_name, repeatition_vector = line.strip().split(':')
+            scenario_name = scenario_name.strip()[1:-1]
+            repeatition_vector = repeatition_vector.strip()#[1:-1]
+            # Add the scenario to the dictionary
+            scenarios_to_repeatitions[scenario_name] = repeatition_vector
+            # scenarios_to_repeatitions[scenario_name] = [int(value.strip()) for value in repeatition_vector.split(',')]
+    return scenarios_to_repeatitions
 
 def main():
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         print(__doc__)
         sys.exit(1)
 
-    input_file_path = sys.argv[1]
-    output_file_path = sys.argv[2]
+    input_file_path  = sys.argv[1]
+    rv_file_path     = sys.argv[2]
+    output_file_path = sys.argv[3]
 
     if not os.path.isfile(input_file_path):
         print('Input file does not exist.')
+        sys.exit(1)
+    
+    if not os.path.isfile(rv_file_path):
+        print('Repeatition vector file does not exist.')
         sys.exit(1)
 
     if os.path.isfile(output_file_path):
         print('Output file already exists.')
         # sys.exit(1)
 
+    # Parse the input XML
     tree = ET.parse(input_file_path)
     inproot = tree.getroot()
-    outroot = sdf3_to_forsyde(inproot)
+
+    # Parse the repeatition vector file
+    scenarios_to_repeatitions = extract_repeatition_vectors(rv_file_path)
+
+    # Convert the SDF3-based SADF model to a ForSyDe-based SADF model
+    outroot = sdf3_to_forsyde(inproot, scenarios_to_repeatitions)
 
     # Generate the output XML
     xmlstr = minidom.parseString(ET.tostring(outroot)).toprettyxml(indent="   ")

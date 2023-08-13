@@ -46,10 +46,11 @@ def generate_func_code(lp, func_arg, sdf3root):
     in_vec_args = ', '.join('vector<{}>'.format(p.attrib['type']) for p in lp.findall('port/[@direction="in"]') if p.attrib['name'] != 'cport1')
     out_vec_args = ', '.join('vector<{}>'.format(p.attrib['type']) for p in lp.findall('port/[@direction="out"]'))
     # Generate code based on the process constructor type
+    code = ''
     match lp.find('process_constructor').attrib['name']:
 
         case 'kernelMN':
-            code = '''\
+            code += '''\
 
 void {0}(tuple<{1}>& out,
     const unsigned int& _scenario_state,
@@ -77,9 +78,9 @@ void {0}(tuple<{1}>& out,
 '''.format(func_arg.attrib['value'])
         
         case 'detectorMN':
-            
+            # Generate the function code            
             if func_arg.attrib['name'] == 'cds_func':
-                code = '''\
+                code += '''\
 
 void {}(int& new_scenario,
     const unsigned int& previous_scenario,
@@ -105,18 +106,28 @@ void {}(int& new_scenario,
 '''
             
             elif func_arg.attrib['name'] == 'kss_func':
-                code = '''\
+                # Generate the scenario table code
+                code += '''\
+map<unsigned int,vector<unsigned int>> {}_scenario_table {};
+'''.format(lp.attrib['name'],
+            conv_c_init(lp.find('process_constructor/argument/[@name="scenario_table"]').attrib['value'])
+                )
+                # Generate the function code
+                code += '''\
 
 void {}(tuple<{}>& out,
     const unsigned int& current_scenario,
     const tuple<{}>& inp) {{
 '''.format(func_arg.attrib['value'], out_vec_args, in_vec_args)
-                # Write a 1 to the first element of each vector in the output tuple
+                # Write the current scenario to the first n elements of each vector in the output tuple, where n is the production rate bbased on the scenario table
                 for idx, outport in enumerate(lp.findall('port/[@direction="out"]')):
                     code += '''\
-    get<{}>(out)[0]=1;
-'''.format(idx)
+    get<{0}>(out) = vector<unsigned int>({1}_scenario_table[current_scenario][{0}],current_scenario);
+'''.format(idx, lp.attrib['name'])
+                # increment a static variable to count the number of iterations and stop the simulation after a certain number of iterations
                 code += '''\
+    static int i=0;
+    if(i++==100+16) sc_stop();
 }
 '''
 
