@@ -102,6 +102,9 @@ void {}(int& new_scenario,
             break;
         }
     }
+    // Increment a static variable to count the number of iterations and stop the simulation after a certain number of iterations
+    static int i=0;
+    if(i++==100) sc_stop();
 }
 '''
             
@@ -124,10 +127,7 @@ void {}(tuple<{}>& out,
                     code += '''\
     get<{0}>(out) = vector<unsigned int>({1}_scenario_table[current_scenario][{0}],current_scenario);
 '''.format(idx, lp.attrib['name'])
-                # increment a static variable to count the number of iterations and stop the simulation after a certain number of iterations
                 code += '''\
-    static int i=0;
-    if(i++==100+16) sc_stop();
 }
 '''
 
@@ -172,18 +172,18 @@ SC_MODULE({}) {{
         code += '''\
     {}::{}_port<{}> {};
 '''.format(port_attribs['moc'].upper(), port_attribs['direction'], port_attribs['type'], port_attribs['name'])
-
-    # Generate the top-leve signals
-    for insignal in inproot.findall('signal'):
-        signal_attribs = insignal.attrib
-        code += '''\
-    {}::signal<{}> {};
-'''.format(signal_attribs['moc'].upper(), signal_attribs['type'], signal_attribs['name'])
     
     # Generate the constructor
     code += '''\
     SC_CTOR({}) {{
 '''.format(inproot.attrib['name'])
+    
+    # Generate the top-level signals
+    for insignal in inproot.findall('signal'):
+        signal_attribs = insignal.attrib
+        code += '''\
+        auto {0} = new {1}::signal<{2}>("{0}", 16);
+'''.format(signal_attribs['name'], signal_attribs['moc'].upper(), signal_attribs['type'])
 
     # Generate the top-level leaf processes
     for lp in inproot.findall('leaf_process'):
@@ -194,13 +194,13 @@ SC_MODULE({}) {{
         # argument values
         arg_values = ', '.join(conv_c_init(arg.attrib['value']) for arg in lp.findall('process_constructor/argument'))
         # output and input bindings
-        out_bindings = ', '.join(get_port_bindings(inproot, p, inparent)[0].attrib['name'] for p in lp_outs)
-        inp_bindings = ', '.join(get_port_bindings(inproot, p, inparent)[0].attrib['name'] for p in lp_inps)
+        out_bindings = ', '.join('*'+get_port_bindings(inproot, p, inparent)[0].attrib['name'] for p in lp_outs)
+        inp_bindings = ', '.join('*'+get_port_bindings(inproot, p, inparent)[0].attrib['name'] for p in lp_inps)
         # If the leaf process is a kernelMN, then remove the first input port (cport1) from the input bindings
         if lp_pc_attribs['name'] == 'kernelMN':
             cnt_binding, inp_bindings = inp_bindings.split(',', 1)
         code += '''\
-    auto {0} = {1}::make_{2}("{0}", {3}, {4}{5}, {6});
+        auto {0} = {1}::make_{2}("{0}", {3}, {4}{5}, {6});
 '''.format(
             lp_attribs['name'],
             lp_pc_attribs['moc'].upper(),
