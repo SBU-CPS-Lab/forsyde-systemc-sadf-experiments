@@ -104,7 +104,7 @@ void {}(int& new_scenario,
     }
     // Increment a static variable to count the number of iterations and stop the simulation after a certain number of iterations
     static int i=0;
-    if(i++==100) sc_stop();
+    if(i++==100) wait();
 }
 '''
             

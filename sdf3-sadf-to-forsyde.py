@@ -160,9 +160,9 @@ def sdf3_to_forsyde(inproot, rv):
 Read the repeatition vectors from the file.
 The function gets the path to the repeatition vector file as input and returns a dictionary of scenarios to repeatition vectors.
 The format of the output file is:
-[s, 0]: [2, 1, 2, 1, 1]
-[s, 1]: [2, 1, 2, 1, 1]
-[s, 2]: [1, 1, 2, 1, 1]
+s0: [2, 1, 2, 1, 1]
+s1: [2, 1, 2, 1, 1]
+s2: [1, 1, 2, 1, 1]
 ...
 '''
 def extract_repeatition_vectors(rv_file_path):
@@ -174,8 +174,7 @@ def extract_repeatition_vectors(rv_file_path):
         for line in f:
             # Extract the scenario name and the repeatition vector
             scenario_name, repeatition_vector = line.strip().split(':')
-            scenario_name = scenario_name.strip()[1:-1]
-            repeatition_vector = repeatition_vector.strip()#[1:-1]
+            repeatition_vector = repeatition_vector.strip()
             # Add the scenario to the dictionary
             scenarios_to_repeatitions[scenario_name] = repeatition_vector
             # scenarios_to_repeatitions[scenario_name] = [int(value.strip()) for value in repeatition_vector.split(',')]

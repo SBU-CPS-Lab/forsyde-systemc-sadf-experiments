@@ -1,0 +1,40 @@
+Only in sdf3/build: release
+Only in sdf3/build: work
+diff -ur sdf32/fsmsadf/tools/sdf3analyze/sdf3analyze.cc sdf3/fsmsadf/tools/sdf3analyze/sdf3analyze.cc
+--- sdf32/fsmsadf/tools/sdf3analyze/sdf3analyze.cc	2014-07-24 12:16:04.000000000 +0430
++++ sdf3/fsmsadf/tools/sdf3analyze/sdf3analyze.cc	2023-08-14 23:56:54.789489790 +0330
+@@ -67,6 +67,7 @@
+         out << endl;
+         out << "       extractscenariographs" << endl;
+         out << "       throughput" << endl;
++        out << "       repeatitions" << endl;
+         out << "       isolatescenarios" << endl;
+         out << "       mpeigen" << endl;
+         out << "       throughput-statespace" << endl;
+@@ -236,6 +237,26 @@
+             printTimer(out, &timer);
+             out << endl;
+         }
++        else if (analyze.front().key == "repeatitions")
++        {
++            // The set of scenarios...
++            Scenarios scenarios = fsmsadfGraph->getScenarios();
++
++            // Calculate repeatition vector
++            for (Scenarios::const_iterator i = scenarios.begin();
++                 i != scenarios.end(); i++)
++            {
++                Scenario *s = *i;
++                RepetitionVector rv = computeRepetitionVector(s->getScenarioGraph(),s);
++                out << s->getName() << ": [";
++                string sep = "";
++                for (const auto& i: rv) {
++                    out << sep << i;
++                    sep = ", ";
++                }
++                out << "]" << endl;
++            }
++        }
+         else if (analyze.front().key == "isolatescenarios")
+         {
+             Graph *newFSMsadfGraph = fsmsadfGraph->clone(GraphComponent(NULL, 0));
