@@ -1,0 +1,19 @@
+<sdf3 type='fsmsadf' version='1.0'
+    xsi:noNamespaceSchemaLocation='http://www.es.ele.tue.nl/sdf3/xsd/sdf3-sdf.xsd'>
+    <settings type='generate'>
+        <stronglyConnected/>
+        <nrScenarioGraphs n='1' />
+        <nrActors n='10' />
+        <degree avg='2' var='1' min='1' max='4' />
+        <iterCnt avg='2' var='1' min='1' max='5' />
+        <initialTokenChannelProp p='0' />
+        <initialTokenProp p='0' />
+        <nrScenarios n='7' />
+        <nrProcTypes n='1' />
+        <mapChance p='0.25' />
+        <execTime avg='20' var='1' min='18' max='22' />
+        <!--stateSize avg='1' var='1' min='1' max='1'/-->
+        <tokenSize avg='2' var='1' min='1' max='4' />
+        <throughputConstraint autoConcurrencyDegree='1' throughputScaleFactor='0.1' />
+    </settings>
+</sdf3>

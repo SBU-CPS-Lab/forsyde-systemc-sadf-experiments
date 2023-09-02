@@ -1,0 +1,669 @@
+<?xml version="1.0" ?>
+<process_network name="sdf3_graph_repeatitions">
+   <signal name="ch0" moc="sadf" type="array&lt;int,1&gt;" source="a1" source_port="p3" target="a0" target_port="p1"/>
+   <signal name="ch1" moc="sadf" type="array&lt;int,2&gt;" source="a2" source_port="p1" target="a1" target_port="p0"/>
+   <signal name="ch2" moc="sadf" type="array&lt;int,2&gt;" source="a3" source_port="p1" target="a0" target_port="p0"/>
+   <signal name="ch3" moc="sadf" type="array&lt;int,3&gt;" source="a0" source_port="p3" target="a4" target_port="p0"/>
+   <signal name="ch4" moc="sadf" type="array&lt;int,2&gt;" source="a5" source_port="p1" target="a4" target_port="p1"/>
+   <signal name="ch5" moc="sadf" type="array&lt;int,3&gt;" source="a4" source_port="p2" target="ch5_delay" target_port="iport1"/>
+   <signal name="ch6" moc="sadf" type="array&lt;int,2&gt;" source="a2" source_port="p2" target="a7" target_port="p0"/>
+   <signal name="ch7" moc="sadf" type="array&lt;int,3&gt;" source="a6" source_port="p4" target="a8" target_port="p0"/>
+   <signal name="ch8" moc="sadf" type="array&lt;int,3&gt;" source="a9" source_port="p3" target="a6" target_port="p0"/>
+   <signal name="ch9" moc="sadf" type="array&lt;int,2&gt;" source="a10" source_port="p2" target="a5" target_port="p0"/>
+   <signal name="ch10" moc="sadf" type="array&lt;int,1&gt;" source="a1" source_port="p2" target="a11" target_port="p0"/>
+   <signal name="ch11" moc="sadf" type="array&lt;int,1&gt;" source="a12" source_port="p4" target="a9" target_port="p2"/>
+   <signal name="ch12" moc="sadf" type="array&lt;int,3&gt;" source="a11" source_port="p2" target="a13" target_port="p1"/>
+   <signal name="ch13" moc="sadf" type="array&lt;int,3&gt;" source="a14" source_port="p4" target="a10" target_port="p0"/>
+   <signal name="ch14" moc="sadf" type="array&lt;int,1&gt;" source="a15" source_port="p1" target="a9" target_port="p1"/>
+   <signal name="ch15" moc="sadf" type="array&lt;int,3&gt;" source="a12" source_port="p2" target="a16" target_port="p1"/>
+   <signal name="ch16" moc="sadf" type="array&lt;int,1&gt;" source="a16" source_port="p2" target="a17" target_port="p1"/>
+   <signal name="ch17" moc="sadf" type="array&lt;int,2&gt;" source="a18" source_port="p1" target="ch17_delay" target_port="iport1"/>
+   <signal name="ch18" moc="sadf" type="array&lt;int,2&gt;" source="a6" source_port="p2" target="a19" target_port="p1"/>
+   <signal name="ch19" moc="sadf" type="array&lt;int,1&gt;" source="a20" source_port="p3" target="a12" target_port="p1"/>
+   <signal name="ch20" moc="sadf" type="array&lt;int,3&gt;" source="a13" source_port="p2" target="a21" target_port="p0"/>
+   <signal name="ch21" moc="sadf" type="array&lt;int,4&gt;" source="a14" source_port="p3" target="a22" target_port="p0"/>
+   <signal name="ch22" moc="sadf" type="array&lt;int,2&gt;" source="a6" source_port="p3" target="ch22_delay" target_port="iport1"/>
+   <signal name="ch23" moc="sadf" type="array&lt;int,2&gt;" source="a8" source_port="p2" target="ch23_delay" target_port="iport1"/>
+   <signal name="ch24" moc="sadf" type="array&lt;int,3&gt;" source="a25" source_port="p2" target="a20" target_port="p1"/>
+   <signal name="ch25" moc="sadf" type="array&lt;int,3&gt;" source="a26" source_port="p3" target="a14" target_port="p0"/>
+   <signal name="ch26" moc="sadf" type="array&lt;int,2&gt;" source="a23" source_port="p3" target="a27" target_port="p0"/>
+   <signal name="ch27" moc="sadf" type="array&lt;int,1&gt;" source="a28" source_port="p2" target="a23" target_port="p1"/>
+   <signal name="ch28" moc="sadf" type="array&lt;int,2&gt;" source="a22" source_port="p1" target="a29" target_port="p0"/>
+   <signal name="ch29" moc="sadf" type="array&lt;int,1&gt;" source="a30" source_port="p1" target="a2" target_port="p0"/>
+   <signal name="ch30" moc="sadf" type="array&lt;int,2&gt;" source="a27" source_port="p2" target="a31" target_port="p0"/>
+   <signal name="ch31" moc="sadf" type="array&lt;int,1&gt;" source="a32" source_port="p1" target="a28" target_port="p1"/>
+   <signal name="ch32" moc="sadf" type="array&lt;int,4&gt;" source="a33" source_port="p1" target="a10" target_port="p1"/>
+   <signal name="ch33" moc="sadf" type="array&lt;int,2&gt;" source="a34" source_port="p1" target="a26" target_port="p1"/>
+   <signal name="ch34" moc="sadf" type="array&lt;int,2&gt;" source="a17" source_port="p2" target="a35" target_port="p0"/>
+   <signal name="ch35" moc="sadf" type="array&lt;int,2&gt;" source="a11" source_port="p1" target="a36" target_port="p2"/>
+   <signal name="ch36" moc="sadf" type="array&lt;int,3&gt;" source="a19" source_port="p2" target="a37" target_port="p0"/>
+   <signal name="ch37" moc="sadf" type="array&lt;int,1&gt;" source="a38" source_port="p2" target="a27" target_port="p1"/>
+   <signal name="ch38" moc="sadf" type="array&lt;int,2&gt;" source="a37" source_port="p2" target="ch38_delay" target_port="iport1"/>
+   <signal name="ch39" moc="sadf" type="array&lt;int,2&gt;" source="a27" source_port="p3" target="a12" target_port="p0"/>
+   <signal name="ch40" moc="sadf" type="array&lt;int,2&gt;" source="a28" source_port="p4" target="a20" target_port="p2"/>
+   <signal name="ch41" moc="sadf" type="array&lt;int,2&gt;" source="a7" source_port="p1" target="ch41_delay" target_port="iport1"/>
+   <signal name="ch42" moc="sadf" type="array&lt;int,3&gt;" source="a17" source_port="p3" target="a8" target_port="p1"/>
+   <signal name="ch43" moc="sadf" type="array&lt;int,3&gt;" source="a23" source_port="p5" target="a17" target_port="p0"/>
+   <signal name="ch44" moc="sadf" type="array&lt;int,1&gt;" source="a29" source_port="p1" target="a18" target_port="p0"/>
+   <signal name="ch45" moc="sadf" type="array&lt;int,3&gt;" source="a18" source_port="p2" target="ch45_delay" target_port="iport1"/>
+   <signal name="ch46" moc="sadf" type="array&lt;int,2&gt;" source="a21" source_port="p2" target="ch46_delay" target_port="iport1"/>
+   <signal name="ch47" moc="sadf" type="array&lt;int,3&gt;" source="a27" source_port="p4" target="a3" target_port="p0"/>
+   <signal name="ch48" moc="sadf" type="array&lt;int,3&gt;" source="a39" source_port="p1" target="a25" target_port="p0"/>
+   <signal name="ch49" moc="sadf" type="array&lt;int,2&gt;" source="a33" source_port="p3" target="a13" target_port="p0"/>
+   <signal name="ch50" moc="sadf" type="array&lt;int,3&gt;" source="a31" source_port="p1" target="ch50_delay" target_port="iport1"/>
+   <signal name="ch51" moc="sadf" type="array&lt;int,1&gt;" source="a23" source_port="p4" target="a15" target_port="p0"/>
+   <signal name="ch52" moc="sadf" type="array&lt;int,1&gt;" source="a28" source_port="p5" target="a26" target_port="p0"/>
+   <signal name="ch53" moc="sadf" type="array&lt;int,4&gt;" source="a35" source_port="p1" target="a26" target_port="p2"/>
+   <signal name="ch54" moc="sadf" type="array&lt;int,2&gt;" source="a37" source_port="p1" target="ch54_delay" target_port="iport1"/>
+   <signal name="ch55" moc="sadf" type="array&lt;int,3&gt;" source="a0" source_port="p2" target="a14" target_port="p1"/>
+   <signal name="ch56" moc="sadf" type="array&lt;int,2&gt;" source="a20" source_port="p4" target="a19" target_port="p0"/>
+   <signal name="ch57" moc="sadf" type="array&lt;int,2&gt;" source="a33" source_port="p4" target="a25" target_port="p1"/>
+   <signal name="ch58" moc="sadf" type="array&lt;int,2&gt;" source="a24" source_port="p1" target="a14" target_port="p2"/>
+   <signal name="ch59" moc="sadf" type="array&lt;int,2&gt;" source="a13" source_port="p4" target="a34" target_port="p0"/>
+   <signal name="ch60" moc="sadf" type="array&lt;int,1&gt;" source="a12" source_port="p3" target="a16" target_port="p0"/>
+   <signal name="ch61" moc="sadf" type="array&lt;int,2&gt;" source="a36" source_port="p4" target="a28" target_port="p0"/>
+   <signal name="ch62" moc="sadf" type="array&lt;int,2&gt;" source="a36" source_port="p3" target="a20" target_port="p0"/>
+   <signal name="ch63" moc="sadf" type="array&lt;int,2&gt;" source="a21" source_port="p1" target="ch63_delay" target_port="iport1"/>
+   <signal name="ch64" moc="sadf" type="array&lt;int,1&gt;" source="a38" source_port="p1" target="a36" target_port="p0"/>
+   <signal name="ch65" moc="sadf" type="array&lt;int,2&gt;" source="a33" source_port="p2" target="a36" target_port="p1"/>
+   <signal name="a0_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport1" target="a0" target_port="cport1"/>
+   <signal name="a1_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport2" target="a1" target_port="cport1"/>
+   <signal name="a2_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport3" target="a2" target_port="cport1"/>
+   <signal name="a3_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport4" target="a3" target_port="cport1"/>
+   <signal name="a4_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport5" target="a4" target_port="cport1"/>
+   <signal name="a5_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport6" target="a5" target_port="cport1"/>
+   <signal name="a6_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport7" target="a6" target_port="cport1"/>
+   <signal name="a7_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport8" target="a7" target_port="cport1"/>
+   <signal name="a8_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport9" target="a8" target_port="cport1"/>
+   <signal name="a9_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport10" target="a9" target_port="cport1"/>
+   <signal name="a10_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport11" target="a10" target_port="cport1"/>
+   <signal name="a11_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport12" target="a11" target_port="cport1"/>
+   <signal name="a12_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport13" target="a12" target_port="cport1"/>
+   <signal name="a13_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport14" target="a13" target_port="cport1"/>
+   <signal name="a14_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport15" target="a14" target_port="cport1"/>
+   <signal name="a15_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport16" target="a15" target_port="cport1"/>
+   <signal name="a16_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport17" target="a16" target_port="cport1"/>
+   <signal name="a17_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport18" target="a17" target_port="cport1"/>
+   <signal name="a18_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport19" target="a18" target_port="cport1"/>
+   <signal name="a19_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport20" target="a19" target_port="cport1"/>
+   <signal name="a20_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport21" target="a20" target_port="cport1"/>
+   <signal name="a21_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport22" target="a21" target_port="cport1"/>
+   <signal name="a22_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport23" target="a22" target_port="cport1"/>
+   <signal name="a23_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport24" target="a23" target_port="cport1"/>
+   <signal name="a24_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport25" target="a24" target_port="cport1"/>
+   <signal name="a25_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport26" target="a25" target_port="cport1"/>
+   <signal name="a26_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport27" target="a26" target_port="cport1"/>
+   <signal name="a27_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport28" target="a27" target_port="cport1"/>
+   <signal name="a28_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport29" target="a28" target_port="cport1"/>
+   <signal name="a29_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport30" target="a29" target_port="cport1"/>
+   <signal name="a30_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport31" target="a30" target_port="cport1"/>
+   <signal name="a31_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport32" target="a31" target_port="cport1"/>
+   <signal name="a32_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport33" target="a32" target_port="cport1"/>
+   <signal name="a33_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport34" target="a33" target_port="cport1"/>
+   <signal name="a34_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport35" target="a34" target_port="cport1"/>
+   <signal name="a35_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport36" target="a35" target_port="cport1"/>
+   <signal name="a36_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport37" target="a36" target_port="cport1"/>
+   <signal name="a37_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport38" target="a37" target_port="cport1"/>
+   <signal name="a38_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport39" target="a38" target_port="cport1"/>
+   <signal name="a39_detectorsig" moc="sadf" type="unsigned int" source="detector1" source_port="oport40" target="a39" target_port="cport1"/>
+   <signal name="ch5_delaysig" moc="sadf" type="array&lt;int,3&gt;" source="ch5_delay" source_port="oport1" target="a6" target_port="p1"/>
+   <signal name="ch17_delaysig" moc="sadf" type="array&lt;int,2&gt;" source="ch17_delay" source_port="oport1" target="a9" target_port="p0"/>
+   <signal name="ch22_delaysig" moc="sadf" type="array&lt;int,2&gt;" source="ch22_delay" source_port="oport1" target="a23" target_port="p0"/>
+   <signal name="ch23_delaysig" moc="sadf" type="array&lt;int,2&gt;" source="ch23_delay" source_port="oport1" target="a24" target_port="p0"/>
+   <signal name="ch38_delaysig" moc="sadf" type="array&lt;int,2&gt;" source="ch38_delay" source_port="oport1" target="a39" target_port="p0"/>
+   <signal name="ch41_delaysig" moc="sadf" type="array&lt;int,2&gt;" source="ch41_delay" source_port="oport1" target="a38" target_port="p0"/>
+   <signal name="ch45_delaysig" moc="sadf" type="array&lt;int,3&gt;" source="ch45_delay" source_port="oport1" target="a32" target_port="p0"/>
+   <signal name="ch46_delaysig" moc="sadf" type="array&lt;int,2&gt;" source="ch46_delay" source_port="oport1" target="a1" target_port="p1"/>
+   <signal name="ch50_delaysig" moc="sadf" type="array&lt;int,3&gt;" source="ch50_delay" source_port="oport1" target="a23" target_port="p2"/>
+   <signal name="ch54_delaysig" moc="sadf" type="array&lt;int,2&gt;" source="ch54_delay" source_port="oport1" target="a30" target_port="p0"/>
+   <signal name="ch63_delaysig" moc="sadf" type="array&lt;int,2&gt;" source="ch63_delay" source_port="oport1" target="a33" target_port="p0"/>
+   <leaf_process name="ch5_delay">
+      <port name="iport1" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="oport1" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="delayn" moc="sadf">
+         <argument name="init_val" value="array&lt;int,3&gt;()"/>
+         <argument name="n" value="6"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="ch17_delay">
+      <port name="iport1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="oport1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="delayn" moc="sadf">
+         <argument name="init_val" value="array&lt;int,2&gt;()"/>
+         <argument name="n" value="2"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="ch22_delay">
+      <port name="iport1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="oport1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="delayn" moc="sadf">
+         <argument name="init_val" value="array&lt;int,2&gt;()"/>
+         <argument name="n" value="4"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="ch23_delay">
+      <port name="iport1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="oport1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="delayn" moc="sadf">
+         <argument name="init_val" value="array&lt;int,2&gt;()"/>
+         <argument name="n" value="2"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="ch38_delay">
+      <port name="iport1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="oport1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="delayn" moc="sadf">
+         <argument name="init_val" value="array&lt;int,2&gt;()"/>
+         <argument name="n" value="2"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="ch41_delay">
+      <port name="iport1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="oport1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="delayn" moc="sadf">
+         <argument name="init_val" value="array&lt;int,2&gt;()"/>
+         <argument name="n" value="2"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="ch45_delay">
+      <port name="iport1" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="oport1" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="delayn" moc="sadf">
+         <argument name="init_val" value="array&lt;int,3&gt;()"/>
+         <argument name="n" value="2"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="ch46_delay">
+      <port name="iport1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="oport1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="delayn" moc="sadf">
+         <argument name="init_val" value="array&lt;int,2&gt;()"/>
+         <argument name="n" value="2"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="ch50_delay">
+      <port name="iport1" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="oport1" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="delayn" moc="sadf">
+         <argument name="init_val" value="array&lt;int,3&gt;()"/>
+         <argument name="n" value="4"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="ch54_delay">
+      <port name="iport1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="oport1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="delayn" moc="sadf">
+         <argument name="init_val" value="array&lt;int,2&gt;()"/>
+         <argument name="n" value="2"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="ch63_delay">
+      <port name="iport1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="oport1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="delayn" moc="sadf">
+         <argument name="init_val" value="array&lt;int,2&gt;()"/>
+         <argument name="n" value="2"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a0">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <port name="p3" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a0_func"/>
+         <argument name="scenario_table" value="[(0, ([2, 1], [1, 3])), (1, ([1, 1], [1, 3]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a1">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <port name="p3" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a1_func"/>
+         <argument name="scenario_table" value="[(0, ([1, 2], [1, 1])), (1, ([2, 2], [2, 1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a2">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a2_func"/>
+         <argument name="scenario_table" value="[(0, ([2], [1, 1])), (1, ([2], [1, 1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a3">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a3_func"/>
+         <argument name="scenario_table" value="[(0, ([1], [1])), (1, ([1], [1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a4">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a4_func"/>
+         <argument name="scenario_table" value="[(0, ([1, 2], [2])), (1, ([1, 2], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a5">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a5_func"/>
+         <argument name="scenario_table" value="[(0, ([3], [3])), (1, ([3], [3]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a6">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p3" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p4" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a6_func"/>
+         <argument name="scenario_table" value="[(0, ([2, 3], [3, 2, 1])), (1, ([2, 3], [2, 2, 1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a7">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a7_func"/>
+         <argument name="scenario_table" value="[(0, ([1], [2])), (1, ([2], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a8">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a8_func"/>
+         <argument name="scenario_table" value="[(0, ([2, 2], [2])), (1, ([2, 1], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a9">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p3" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a9_func"/>
+         <argument name="scenario_table" value="[(0, ([1, 3, 1], [2])), (1, ([1, 2, 2], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a10">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,4&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a10_func"/>
+         <argument name="scenario_table" value="[(0, ([1, 1], [2])), (1, ([1, 1], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a11">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p2" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a11_func"/>
+         <argument name="scenario_table" value="[(0, ([1], [2, 2])), (1, ([1], [2, 1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a12">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <port name="p3" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <port name="p4" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a12_func"/>
+         <argument name="scenario_table" value="[(0, ([1, 1], [1, 1, 2])), (1, ([1, 3], [2, 2, 2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a13">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <port name="p4" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a13_func"/>
+         <argument name="scenario_table" value="[(0, ([1, 1], [2, 3])), (1, ([1, 2], [2, 2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a14">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p3" moc="sadf" type="array&lt;int,4&gt;" direction="out"/>
+      <port name="p4" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a14_func"/>
+         <argument name="scenario_table" value="[(0, ([1, 1, 2], [1, 3])), (1, ([2, 1, 2], [1, 3]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a15">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a15_func"/>
+         <argument name="scenario_table" value="[(0, ([2], [2])), (1, ([2], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a16">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a16_func"/>
+         <argument name="scenario_table" value="[(0, ([1, 1], [2])), (1, ([2, 2], [1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a17">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p3" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a17_func"/>
+         <argument name="scenario_table" value="[(0, ([2, 1], [2, 1])), (1, ([2, 2], [1, 1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a18">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p2" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a18_func"/>
+         <argument name="scenario_table" value="[(0, ([3], [2, 2])), (1, ([2], [2, 2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a19">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a19_func"/>
+         <argument name="scenario_table" value="[(0, ([1, 2], [1])), (1, ([3, 2], [1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a20">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p3" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <port name="p4" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a20_func"/>
+         <argument name="scenario_table" value="[(0, ([2, 2, 3], [1, 3])), (1, ([2, 2, 4], [2, 2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a21">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a21_func"/>
+         <argument name="scenario_table" value="[(0, ([2], [1, 1])), (1, ([1], [1, 1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a22">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,4&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a22_func"/>
+         <argument name="scenario_table" value="[(0, ([1], [3])), (1, ([1], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a23">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p3" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p4" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <port name="p5" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a23_func"/>
+         <argument name="scenario_table" value="[(0, ([2, 3, 2], [1, 3, 2])), (1, ([2, 4, 2], [1, 2, 1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a24">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a24_func"/>
+         <argument name="scenario_table" value="[(0, ([1], [1])), (1, ([1], [1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a25">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a25_func"/>
+         <argument name="scenario_table" value="[(0, ([2, 1], [1])), (1, ([2, 1], [3]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a26">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,4&gt;" direction="in"/>
+      <port name="p3" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a26_func"/>
+         <argument name="scenario_table" value="[(0, ([3, 3, 2], [1])), (1, ([4, 2, 1], [1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a27">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p3" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p4" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a27_func"/>
+         <argument name="scenario_table" value="[(0, ([2, 2], [2, 1, 2])), (1, ([2, 2], [2, 2, 1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a28">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <port name="p4" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p5" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a28_func"/>
+         <argument name="scenario_table" value="[(0, ([2, 2], [2, 1, 1])), (1, ([2, 2], [2, 3, 2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a29">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a29_func"/>
+         <argument name="scenario_table" value="[(0, ([1], [1])), (1, ([1], [1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a30">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a30_func"/>
+         <argument name="scenario_table" value="[(0, ([1], [1])), (1, ([1], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a31">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a31_func"/>
+         <argument name="scenario_table" value="[(0, ([1], [2])), (1, ([1], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a32">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a32_func"/>
+         <argument name="scenario_table" value="[(0, ([1], [3])), (1, ([1], [4]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a33">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,4&gt;" direction="out"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p3" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p4" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a33_func"/>
+         <argument name="scenario_table" value="[(0, ([2], [3, 2, 2, 2])), (1, ([2], [3, 2, 1, 2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a34">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a34_func"/>
+         <argument name="scenario_table" value="[(0, ([2], [1])), (1, ([1], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a35">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,4&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a35_func"/>
+         <argument name="scenario_table" value="[(0, ([2], [1])), (1, ([1], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a36">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,1&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p3" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p4" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a36_func"/>
+         <argument name="scenario_table" value="[(0, ([2, 1, 1], [1, 3])), (1, ([2, 1, 2], [3, 4]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a37">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,3&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <port name="p2" moc="sadf" type="array&lt;int,2&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a37_func"/>
+         <argument name="scenario_table" value="[(0, ([3], [2, 2])), (1, ([2], [2, 2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a38">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <port name="p2" moc="sadf" type="array&lt;int,1&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a38_func"/>
+         <argument name="scenario_table" value="[(0, ([1], [2, 1])), (1, ([1], [2, 1]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="a39">
+      <port name="cport1" moc="sadf" type="unsigned int" direction="in"/>
+      <port name="p0" moc="sadf" type="array&lt;int,2&gt;" direction="in"/>
+      <port name="p1" moc="sadf" type="array&lt;int,3&gt;" direction="out"/>
+      <process_constructor name="kernelMN" moc="sadf">
+         <argument name="_func" value="a39_func"/>
+         <argument name="scenario_table" value="[(0, ([1], [2])), (1, ([1], [2]))]"/>
+      </process_constructor>
+   </leaf_process>
+   <leaf_process name="detector1">
+      <port name="oport1" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport2" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport3" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport4" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport5" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport6" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport7" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport8" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport9" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport10" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport11" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport12" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport13" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport14" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport15" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport16" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport17" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport18" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport19" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport20" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport21" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport22" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport23" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport24" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport25" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport26" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport27" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport28" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport29" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport30" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport31" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport32" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport33" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport34" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport35" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport36" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport37" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport38" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport39" moc="sadf" type="unsigned int" direction="out"/>
+      <port name="oport40" moc="sadf" type="unsigned int" direction="out"/>
+      <process_constructor name="detectorMN" moc="sadf">
+         <argument name="cds_func" value="detectorcds_func"/>
+         <argument name="kss_func" value="detectorkss_func"/>
+         <argument name="scenario_table" value="[(0,[1, 1, 1, 2, 3, 2, 2, 1, 1, 2, 3, 1, 1, 2, 1, 3, 1, 2, 1, 3, 1, 2, 1, 2, 2, 2, 1, 1, 3, 3, 2, 2, 2, 1, 3, 2, 2, 1, 2, 2]),(1,[1, 1, 2, 1, 3, 2, 2, 1, 1, 2, 3, 2, 2, 1, 1, 2, 2, 1, 1, 2, 3, 2, 1, 2, 2, 2, 2, 1, 4, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 2])]"/>
+         <argument name="init_sc" value="0"/>
+         <argument name="itok" value="{}"/>
+      </process_constructor>
+   </leaf_process>
+</process_network>

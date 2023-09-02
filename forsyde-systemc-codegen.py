@@ -55,14 +55,15 @@ def generate_func_code(lp, func_arg, sdf3root):
 void {0}(tuple<{1}>& out,
     const unsigned int& _scenario_state,
     const tuple<{2}>& inp) {{
-    static int i=0;volatile int j,k;
+    static int i=0;volatile int j,k,l;
     switch(_scenario_state) {{
 '''.format(func_arg.attrib['value'], out_vec_args, in_vec_args)
             for idx,scenario in enumerate(scenarios.findall('scenario')):
                 code += '''\
         case {0}: {{
             for(j=0;j<{1};j++)
-                for(k=0;k<1000000;k++);
+                for(k=0;k<100;k++)
+                    l++;
             break;
         }}
 '''.format(idx, scenario.find('actorProperties/[@actor="{}"]/processor/[@default="true"]/executionTime'.format(lp.attrib['name'])).attrib['time'])
@@ -73,7 +74,7 @@ void {0}(tuple<{1}>& out,
         }}
     }}
     
-    std::cout<<"from: {0} iter: "<<i++<<std::endl;
+    // std::cout<<"from: {0} iter: "<<i++<<std::endl;
 }}
 '''.format(func_arg.attrib['value'])
         
